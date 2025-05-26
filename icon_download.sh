@@ -37,8 +37,14 @@ checkgit() {
 	if [ -d /config/unraid_vm_icons ] ; then
     rm -r /config/unraid_vm_icons
     fi
+	
+	# set git repo to default if not set in template
+	if [[ -z "${GIT_REPO}" ]]; then
+		GIT_REPO="https://github.com/SpaceinvaderOne/unraid_vm_icons.git"
+	fi
+
 	#run gitclone
-git -C /config clone https://github.com/SpaceinvaderOne/unraid_vm_icons.git				
+	git -C /config clone "${GIT_REPO}"
 }
 
 # Create icon directory if not present then download selected icons. Skip if already done
